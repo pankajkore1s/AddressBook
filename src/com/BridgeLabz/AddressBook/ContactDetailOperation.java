@@ -8,7 +8,7 @@ public class ContactDetailOperation {
     public void addContact() {
         //taking Contact details from user
         System.out.println("First name");
-        String First_name = scan.nextLine();
+        String first_name = scan.nextLine();
         System.out.println("Last Name");
         String last_name = scan.nextLine();
         System.out.println("Address");
@@ -25,7 +25,7 @@ public class ContactDetailOperation {
         String email = scan.next();
 
         //parameterized constructor calling of Contact person class
-        ContactPerson person = new ContactPerson (First_name,last_name,address,city,state,zip, phone_number,email);
+        ContactPerson person = new ContactPerson (first_name,last_name,address,city,state,zip, phone_number,email);
         //Adding object element in arrayList
         contact.add(person);
 
@@ -95,6 +95,29 @@ public class ContactDetailOperation {
         if (flag == false) {
             System.out.println(enteredName + " Not Found!");
             }
+    }
+    public void deleteContact() {
+        System.out.println("Enter name wants to delete:");
+        String firstName = scan.next();
+        boolean flag = false;
+        for (ContactPerson person : contact) {
+            if (person.first_name.equals(firstName)) {
+                flag = true;
+                contact.remove(person);
+            }
+        }
+        if (flag == false) {
+            System.out.println("Name not found");
+        }
+    }
+    public void displayContact() {
+        int i = 1;
+        for (ContactPerson cp : contact) {
+            for (String s : Arrays.asList("Person : " + i, "First Name : " + cp.first_name, "Last Name : " + cp.last_name, "Address : " + cp.address, "State: " + cp.state, "city: " + cp.city, "zip : " + cp.zip, "phone number : " + cp.phone_number, "Email : " + cp.email)) {
+                System.out.println(s);
+            }
+            i++;
+        }
     }
 }
 
