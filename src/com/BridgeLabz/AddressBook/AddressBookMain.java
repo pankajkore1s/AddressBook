@@ -14,18 +14,22 @@ public class AddressBookMain {
             switch (choice) {
                 case 1:
                     contactDetail.addContact();
+                    contactDetail.showDetails();
                     System.out.println("Contact Added Successfully!");
                     break;
                 case 2:
                     contactDetail.editContact();
+                    contactDetail.showDetails();
                     System.out.println("Contact edited Successfully");
                     break;
                 case 3:
                     contactDetail.deleteContact();
+                    contactDetail.showDetails();
                     System.out.println("Contact deleted Successfully");
                     break;
-                default:System.out.println("Please Enter Valid Choice:");
-                break;
+                default:
+                    System.out.println("Please Enter Valid Choice:");
+                    break;
             }
         }
     }
