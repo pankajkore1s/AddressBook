@@ -1,24 +1,25 @@
 package com.BridgeLabz.AddressBook;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 public class ContactDetailOperation {
-    static ArrayList<ContactPerson> contact = new ArrayList<ContactPerson>();
+    public static ArrayList<ContactPerson> contact = new ArrayList<ContactPerson>();
     static Scanner scan = new Scanner(System.in);
-
+    //----Adding contact---//
     public void addContact() {
         //taking Contact details from user
         System.out.println("First name");
-        String first_name = scan.nextLine();
+        String first_name = scan.next();
         System.out.println("Last Name");
-        String last_name = scan.nextLine();
+        String last_name = scan.next();
         System.out.println("Address");
-        String address = scan.nextLine();
+        String address = scan.next();
         System.out.println("State");
-        String state = scan.nextLine();
+        String state = scan.next();
         System.out.println("city");
-        String city = scan.nextLine();
+        String city = scan.next();
         System.out.println("Zip");
         int zip = scan.nextInt();
         System.out.println("PhoneNo");
@@ -106,14 +107,49 @@ public class ContactDetailOperation {
         System.out.println("Enter name wants to delete:");
         String firstName = scan.next();
         boolean flag = false;
-        for (ContactPerson person : contact) {
-            if (person.first_name.equals(firstName)) {
+        for (ContactPerson personDetail : contact) {
+            if (personDetail.first_name.equals(firstName)) {
+                contact.remove(personDetail);
                 flag = true;
-                contact.remove(person);
             }
         }
         if (flag == false) {
             System.out.println("Name not found");
+        }
+    }
+    //---Adding address book--//
+    public void addAddressBook(){
+        boolean isFlag=true;
+        while(isFlag){
+            System.out.println("Address Book Menu");
+            System.out.println("1.Add contact. \n 2.edit contact. \n 3.Delete contact. \n 4.Exit");//choices for operation
+            System.out.print("Enter Choice:");
+            int option=scan.nextInt();
+            switch (option){
+                case 1:
+                    addContact();
+                    showDetails();
+                    System.out.println("Contact added successFully");
+                    System.out.println("---------------------------");
+                    break;
+                case 2:
+                    editContact();
+                    showDetails();
+                    System.out.println("Contact Edited Successfully");
+                    System.out.println("---------------------------");
+                    break;
+                case 3:
+                    deleteContact();
+                    showDetails();
+                    System.out.println("Contact deleted successfully");
+                    System.out.println("-----------------------------");
+                    break;
+                case 4:
+                    isFlag=false;
+                    System.out.println("Exit");
+                default:
+                System.out.println("Please enter valid choice");
+            }
         }
     }
 }

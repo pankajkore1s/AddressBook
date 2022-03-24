@@ -9,7 +9,7 @@ public class ContactPerson {
     public int zip;
     public long phone_number;
     public String email;
-
+    //------parameterized constructor----//
     public ContactPerson(String first_name, String last_name, String address, String city, String state, int zip, long phone_number, String email) {
         this.first_name = first_name;
         this.last_name = last_name;
