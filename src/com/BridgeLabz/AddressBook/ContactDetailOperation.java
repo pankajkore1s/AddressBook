@@ -3,6 +3,8 @@ package com.BridgeLabz.AddressBook;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.BridgeLabz.AddressBook.AddressBookMain.addressBookDetail;
+
 public class ContactDetailOperation {
     public static ArrayList<ContactPerson> contact = new ArrayList<ContactPerson>();
     static Scanner scan = new Scanner(System.in);
@@ -128,39 +130,21 @@ public class ContactDetailOperation {
             System.out.println("The Duplicate contact is : "+contact.getFirst_name()+ " "+ contact.getLast_name());
         }
     }
-    //---Adding address book--//
-    public void addAddressBook(){
-        boolean isFlag=true;
-        while(isFlag){
-            System.out.println("Address Book Menu");
-            System.out.println("1.Add contact. \n 2.edit contact. \n 3.Delete contact. \n 4.Exit");//choices for operation
-            System.out.print("Enter Choice:");
-            int option=scan.nextInt();
-            switch (option){
-                case 1:
-                    addContact();
-                    showDetails();
-                    System.out.println("Contact added successFully");
-                    System.out.println("---------------------------");
-                    break;
-                case 2:
-                    editContact();
-                    showDetails();
-                    System.out.println("Contact Edited Successfully");
-                    System.out.println("---------------------------");
-                    break;
-                case 3:
-                    deleteContact();
-                    showDetails();
-                    System.out.println("Contact deleted successfully");
-                    System.out.println("-----------------------------");
-                    break;
-                case 4:
-                    isFlag=false;
-                    System.out.println("Exit");
-                default:
-                System.out.println("Please enter valid choice");
-            }
+
+    /**
+     * search person by city
+     */
+    public void searchPersonByCity(String cityName){
+        for(Map.Entry<String,ArrayList<ContactPerson>>entry:addressBookDetail.entrySet()){
+            System.out.println("The Address Book: "+entry.getKey());
+        //getPersonByCity//
+        }
+    }
+
+    //search person by state//
+    public void searchPersonByState(String stateName){
+        for (Map.Entry<String,ArrayList<ContactPerson>>entry:addressBookDetail.entrySet()){
+            System.out.println("The Address book : "+entry.getKey());
         }
     }
 }
