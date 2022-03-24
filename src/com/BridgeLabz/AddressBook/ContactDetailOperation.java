@@ -1,9 +1,8 @@
 package com.BridgeLabz.AddressBook;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class ContactDetailOperation {
     public static ArrayList<ContactPerson> contact = new ArrayList<ContactPerson>();
     static Scanner scan = new Scanner(System.in);
@@ -26,7 +25,6 @@ public class ContactDetailOperation {
         long phone_number = scan.nextLong();
         System.out.println("Email");
         String email = scan.next();
-        scan.close();
 
         //parameterized constructor calling of Contact person class
         ContactPerson person = new ContactPerson(first_name, last_name, address, city, state, zip, phone_number, email);
@@ -115,6 +113,19 @@ public class ContactDetailOperation {
         }
         if (flag == false) {
             System.out.println("Name not found");
+        }else {
+            System.out.println("Contact deleted successfully");
+        }
+    }
+
+    /**
+     * check duplicates in adress book
+     */
+    public static void checkDuplicate(){
+        Set<String> ContactSet=new HashSet<>();
+        Set<ContactPerson>newSet=contact.stream().filter(n -> !ContactSet.add(n.getFirst_name())).collect(Collectors.toSet());
+        for (ContactPerson contact:newSet){
+            System.out.println("The Duplicate contact is : "+contact.getFirst_name()+ " "+ contact.getLast_name());
         }
     }
     //---Adding address book--//

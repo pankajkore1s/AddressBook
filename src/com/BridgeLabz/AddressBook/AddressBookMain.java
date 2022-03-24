@@ -24,7 +24,7 @@ public class AddressBookMain {
                         addressBookDetail.put(addBookName,contact);
                         contactDetail.addAddressBook();
                         for (Map.Entry<String,ArrayList<ContactPerson>>Entry:addressBookDetail.entrySet()){
-                            System.out.println("AddressBook Nmae:>"+Entry.getKey()+"==>"+"Contact Details:>"+ Entry.getValue() + "==>");
+                            System.out.println("AddressBook Name:>"+Entry.getKey()+"==>"+"Contact Details:>"+ Entry.getValue() + "==>");
                         }
                         break;
                     }
