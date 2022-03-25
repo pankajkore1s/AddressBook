@@ -211,5 +211,38 @@ public class ContactDetailOperation {
             }
         }
     }
+
+    /**
+     * count person by city
+     */
+    public void countByCity(String city){
+        int personCountInCity=0;
+        for(Map.Entry<String,ContactDetailOperation>entry: addressBookDetail.entrySet()){
+            for (int i=0;i<(entry.getValue()).contact.size();i++){
+                ContactPerson personCount=entry.getValue().contact.get(i);
+                if(city.equals(personCount.getCity())){
+                    personCountInCity++;
+                }
+            }
+            System.out.println("Total count of person in "+city+"-->"+personCountInCity);
+        }
+    }
+
+
+    /**
+     * count persons by state
+     */
+    public void countByState(String state){
+        int personCountInState=0;
+        for(Map.Entry<String,ContactDetailOperation>entry: addressBookDetail.entrySet()){
+            for(int i=0;i<(entry.getValue()).contact.size();i++){
+                ContactPerson personCount=entry.getValue().contact.get(i);
+                if(state.equals(personCount.getState())){
+                    personCountInState++;
+                }
+            }
+            System.out.println("Total count of person in state "+state+"-->"+personCountInState);
+        }
+    }
 }
 

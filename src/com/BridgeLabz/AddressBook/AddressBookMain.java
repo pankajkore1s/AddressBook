@@ -10,7 +10,7 @@ public class AddressBookMain {
         System.out.println("Address Book System!!");
         boolean flag=true;
         while (flag) {
-            System.out.println("1.Add new Address Book \n 2.Check Duplicate Entry \n 3.Search person by city \n 4. Search Person by State \n 5.View person by state \n 6.view person by city \n 7.Exit");
+            System.out.println("1.Add new Address Book \n 2.Check Duplicate Entry \n 3.Search person by city \n 4. Search Person by State \n 5.View person by state \n 6.view person by city \n 7.count people by city \n 8.count people by state \n 9.exit");
             System.out.print("enter choice:");
             int choice = scan.nextInt();
             switch (choice) {
@@ -56,6 +56,16 @@ public class AddressBookMain {
                     contactDetail.viewPersonByCity(city_Name);
                     break;
                 case 7:
+                    System.out.println("Enter the name of city");
+                    String city=scan.next();
+                    contactDetail.countByCity(city);
+                    break;
+                case 8:
+                    System.out.println("Enter the name of State");
+                    String state=scan.next();
+                    contactDetail.countByState(state);
+                case 9:
+                    System.out.println("Exit");
                     flag=false;
                     break;
             }
