@@ -1,5 +1,6 @@
 package com.BridgeLabz.AddressBook;
 import java.util.*;
+import java.util.stream.DoubleStream;
 
 public class AddressBookMain {
     public static Map<String, ContactDetailOperation> addressBookDetail=new HashMap<String, ContactDetailOperation>();
@@ -65,6 +66,9 @@ public class AddressBookMain {
                     String state=scan.next();
                     contactDetail.countByState(state);
                 case 9:
+                    contactDetail.sortByNames();
+                    break;
+                case 10:
                     System.out.println("Exit");
                     flag=false;
                     break;
@@ -107,4 +111,6 @@ public class AddressBookMain {
         addressBookDetail.put(addBookName,contactDetail);
         System.out.println(addBookName+" =>"+"Address Book Added Successfully");
     }
+
 }
+

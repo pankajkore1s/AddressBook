@@ -244,5 +244,19 @@ public class ContactDetailOperation {
             System.out.println("Total count of person in state "+state+"-->"+personCountInState);
         }
     }
+
+    public void sortByNames(){
+        for (Map.Entry<String,ContactDetailOperation>entry:AddressBookMain.addressBookDetail.entrySet()){
+            ContactDetailOperation sort=entry.getValue();
+            List<ContactPerson> sortedList = sort.contact.stream().sorted(Comparator
+                            .comparing(ContactPerson::getFirst_name))
+                    .collect(Collectors.toList());
+
+            for (ContactPerson contacts:sortedList){
+                System.out.println("First Name: "+contacts.getFirst_name());
+                System.out.println("Last Name: "+contacts.getLast_name());
+            }
+        }
+    }
 }
 
