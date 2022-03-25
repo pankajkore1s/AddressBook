@@ -3,13 +3,21 @@ package com.BridgeLabz.AddressBook;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.BridgeLabz.AddressBook.AddressBookMain.addAddressBook;
 import static com.BridgeLabz.AddressBook.AddressBookMain.addressBookDetail;
 
 public class ContactDetailOperation {
     public static ArrayList<ContactPerson> contact = new ArrayList<ContactPerson>();
     static Scanner scan = new Scanner(System.in);
+    public HashMap<String,ArrayList<ContactPerson>> personByState;
+    public HashMap<String,ArrayList<ContactPerson>> personByCity;
+
+    public ContactDetailOperation(){
+        personByCity=new HashMap<String,ArrayList<ContactPerson>>();
+        personByState=new HashMap<String,ArrayList<ContactPerson>>();
+    }
     //----Adding contact---//
-    public void addContact() {
+    public ArrayList<ContactPerson> addContact() {
         //taking Contact details from user
         System.out.println("First name");
         String first_name = scan.next();
@@ -32,6 +40,16 @@ public class ContactDetailOperation {
         ContactPerson person = new ContactPerson(first_name, last_name, address, city, state, zip, phone_number, email);
         //Adding object element in arrayList
         contact.add(person);
+
+        if(!personByState.containsKey(state)){
+            personByState.put(state,new ArrayList<ContactPerson>());
+        }
+        personByState.get(state).add(person);
+        if(!personByCity.containsKey(city)){
+            personByCity.put(city,new ArrayList<ContactPerson>());
+        }
+        personByCity.get(city).add(person);
+        return contact;
     }
     //show contact details
     public void showDetails(){
@@ -100,6 +118,8 @@ public class ContactDetailOperation {
         }
         if (flag == false) {
             System.out.println(enteredName + " Not Found!");
+        }else {
+            System.out.println("Contact edited successfully");
         }
     }
 
@@ -111,6 +131,7 @@ public class ContactDetailOperation {
             if (personDetail.first_name.equals(firstName)) {
                 contact.remove(personDetail);
                 flag = true;
+                break;
             }
         }
         if (flag == false) {
@@ -131,20 +152,63 @@ public class ContactDetailOperation {
         }
     }
 
+    public void getPersonNameByCity(String cityName) {
+        List<ContactPerson> list = contact.stream().filter(person -> person.getCity().equals(cityName)).collect(Collectors.toList());
+        for (ContactPerson contact : list) {
+            System.out.println("First Name: " + contact.getFirst_name());
+            System.out.println("Last Name: " + contact.getLast_name());
+        }
+    }
+
+    public void getPersonNameByState(String stateName) {
+        List<ContactPerson> list = contact.stream().filter(person -> person.getState().equals(stateName)).collect(Collectors.toList());
+        for (ContactPerson contact : list) {
+            System.out.println("First Name: " + contact.getFirst_name());
+            System.out.println("Last Name: " + contact.getLast_name());
+        }
+    }
+
     /**
      * search person by city
      */
     public void searchPersonByCity(String cityName){
-        for(Map.Entry<String,ArrayList<ContactPerson>>entry:addressBookDetail.entrySet()){
+        for(Map.Entry<String,ContactDetailOperation>entry: addressBookDetail.entrySet()){
+            ContactDetailOperation value=entry.getValue();
             System.out.println("The Address Book: "+entry.getKey());
+            value.getPersonNameByState(cityName);
         //getPersonByCity//
         }
     }
 
     //search person by state//
     public void searchPersonByState(String stateName){
-        for (Map.Entry<String,ArrayList<ContactPerson>>entry:addressBookDetail.entrySet()){
+        for (Map.Entry<String,ContactDetailOperation>entry: addressBookDetail.entrySet()){
+            ContactDetailOperation value=entry.getValue();
             System.out.println("The Address book : "+entry.getKey());
+            value.getPersonNameByCity(stateName);
+        }
+    }
+    public void viewPersonByCity(String cityName){
+        for(Map.Entry<String,ContactDetailOperation>entry : addressBookDetail.entrySet()){
+            ContactDetailOperation value=entry.getValue();
+            ArrayList<ContactPerson> contacts =value.personByCity.entrySet().stream()
+                    .filter(findCity -> findCity.getKey().equals(cityName))
+                    .map(Map.Entry::getValue).findFirst().orElse(null);
+            for(ContactPerson contact : contacts){
+                System.out.println("First Name: " + contact.getFirst_name() + " Last Name: " + contact.getLast_name());
+            }
+        }
+    }
+
+    public void viewPersonByState(String stateName){
+        for (Map.Entry<String, ContactDetailOperation> entry : addressBookDetail.entrySet()){
+            ContactDetailOperation value =entry.getValue();
+            ArrayList<ContactPerson> contacts = value.personByState.entrySet().stream()
+                    .filter(findState -> findState.getKey().equals(stateName))
+                    .map(Map.Entry::getValue).findFirst().orElse(null);
+            for(ContactPerson contact : contacts){
+                System.out.println("First Name: " + contact.getFirst_name() + " Last Name: " + contact.getLast_name());
+            }
         }
     }
 }

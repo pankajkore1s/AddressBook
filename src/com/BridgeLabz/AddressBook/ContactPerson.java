@@ -1,6 +1,8 @@
 package com.BridgeLabz.AddressBook;
 
-public class ContactPerson {
+import java.util.ArrayList;
+import java.util.function.IntFunction;
+public class ContactPerson extends ArrayList<ContactPerson> {
     public String first_name;
     public String last_name;
     public String address;
